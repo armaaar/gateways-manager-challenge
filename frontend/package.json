@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "react-scripts build",
+    "start:development": "react-scripts start",
+    "start:production": "npm run-script build && node index.js",
+    "start": "npm run-script start:$NODE_ENV",
+    "lint": "eslint .",
+    "test": "react-scripts test"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-google": "^0.14.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

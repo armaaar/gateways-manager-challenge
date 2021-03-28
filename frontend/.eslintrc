@@ -1,0 +1,7 @@
+{
+    "extends": ["eslint:recommended", "react-app", "react-app/jest", "google"],
+    "rules": {
+      "max-len": ["error", { "code": 100 }],
+      "require-jsdoc": 0
+    }
+}

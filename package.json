@@ -1,0 +1,11 @@
+{
+  "name": "musala-task",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Musala practical task",
+  "license": "ISC",
+  "scripts": {
+    "dev": "docker-compose --env-file ./.env.dev up",
+    "start": "docker-compose --env-file ./.env.prod up"
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "env": {
+        "es2020": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "google"],
+    "rules": {
+      "max-len": ["error", { "code": 100 }],
+      "require-jsdoc": 0
+    }
+}
