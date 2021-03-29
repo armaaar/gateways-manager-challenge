@@ -1,7 +1,28 @@
 version: '3.9'
 
 services:
+  db:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  backend:
+    depends_on:
+      - db
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./backend/:/app
+    environment:
+      NODE_ENV: $NODE_ENV
+
   frontend:
+    depends_on:
+      - backend
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -12,14 +33,3 @@ services:
     environment:
       NODE_ENV: $NODE_ENV
       CHOKIDAR_USEPOLLING: 1
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - 4000:4000
-    volumes:
-      - ./backend/:/app
-    environment:
-      NODE_ENV: $NODE_ENV
