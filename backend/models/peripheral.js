@@ -4,8 +4,7 @@ const peripheralSchema = new mongoose.Schema({
   UID: {
     type: Number,
     required: true,
-    index: true,
-    unique: true,
+    index: {unique: true, sparse: true},
   },
   vendor: {
     type: String,

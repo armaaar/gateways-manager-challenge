@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const gatewaysRouter = require('./controllers/gateways/routes');
+
 const app = express();
+app.use(express.urlencoded({extended: true}));
 
 mongoose.connect('mongodb://db/gateways-manager', {
   useNewUrlParser: true,
@@ -8,9 +11,8 @@ mongoose.connect('mongodb://db/gateways-manager', {
 });
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 
-app.get('/', (req, res) => {
-  res.send('This is from express.js');
-});
+// Routes which should handle requests
+app.use('/gateways', gatewaysRouter);
 
 // start express server on port 4000
 app.listen(4000, () => {
