@@ -6,7 +6,14 @@ const getGateways = async (req, res) => {
 };
 
 const getGateway = async (req, res) => {
-  res.status(200).send(await Gateway.findOne({serialNumber: req.params.serialNumber}) || {});
+  const gateway = await Gateway.findOne({serialNumber: req.params.serialNumber});
+
+  if (!gateway) {
+    res.status(404).send({error: 'gateway doesn\'t exist'});
+    return;
+  }
+
+  res.status(200).send(gateway);
 };
 
 const addGateway = async (req, res) => {
@@ -28,7 +35,7 @@ const updateGateway = async (req, res) => {
   const gateway = await Gateway.findOne({serialNumber: req.params.serialNumber});
 
   if (!gateway) {
-    res.status(400).send({error: 'Gateway doesn\'t exist'});
+    res.status(404).send({error: 'Gateway doesn\'t exist'});
     return;
   }
 

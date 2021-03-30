@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const gatewaysRouter = require('./controllers/gateways/routes');
+const peripheralsRouter = require('./controllers/peripherals/routes');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -12,7 +13,8 @@ mongoose.connect('mongodb://db/gateways-manager', {
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 
 // Routes which should handle requests
-app.use('/gateways', gatewaysRouter);
+app.use(gatewaysRouter);
+app.use(peripheralsRouter);
 
 // start express server on port 4000
 app.listen(4000, () => {
