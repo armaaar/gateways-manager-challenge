@@ -1,8 +1,11 @@
-import {ADD_GATEWAYS} from '../actions/gateways-actions';
+import {
+  ADD_GATEWAYS,
+  UPSERT_GATEWAY,
+} from '../actions/gateways-actions';
 
-function addGateways(state, payload) {
+function addGateways(state, gateways) {
   const newGateways = [...state];
-  payload.gateways.forEach((newGateway) => {
+  gateways.forEach((newGateway) => {
     const gatewayIndex = newGateways.findIndex((gateway) => gateway._id === newGateway._id);
     if (gatewayIndex === -1) {
       newGateways.push(newGateway);
@@ -13,10 +16,24 @@ function addGateways(state, payload) {
   return newGateways;
 }
 
+function upsertGateway(state, newGateway) {
+  const newGateways = [...state];
+  const gatewayIndex = newGateways.findIndex((gateway) => gateway._id === newGateway._id);
+  if (gatewayIndex === -1) {
+    newGateways.push(newGateway);
+  } else {
+    newGateways[gatewayIndex] = newGateway;
+  }
+  return newGateways;
+}
+
 export default function gatewaysReducer(state = [], {type, payload}) {
   switch (type) {
     case ADD_GATEWAYS: {
-      return addGateways(state, payload);
+      return addGateways(state, payload.gateways);
+    }
+    case UPSERT_GATEWAY: {
+      return upsertGateway(state, payload.gateway);
     }
     default: {
       return state;
