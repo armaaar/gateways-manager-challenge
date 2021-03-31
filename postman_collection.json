@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "2fba223e-e659-4eac-9550-c77773913092",
+		"name": "Musala Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gateways",
+			"item": [
+				{
+					"name": "Create gateway",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "serialNumber",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "readableName",
+									"value": "Name",
+									"type": "text"
+								},
+								{
+									"key": "ipv4",
+									"value": "123.123.123.123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read gateways",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/gateways",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read gateway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/gateways/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update gateway",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "serialNumber",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "readableName",
+									"value": "Namesss",
+									"type": "text"
+								},
+								{
+									"key": "ipv4",
+									"value": "123.123.123.123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete gateway",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Peripherals",
+			"item": [
+				{
+					"name": "Create gateway peripheral",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UID",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "vendor",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways/123/peripherals",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123",
+								"peripherals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read gateway peripherals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/gateways/123/peripherals",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123",
+								"peripherals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read gateway peripheral",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/gateways/123/peripherals/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123",
+								"peripherals",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updategateway peripheral",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UID",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "vendor",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways/123/peripherals/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123",
+								"peripherals",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete gateway peripheral",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:4000/api/gateways/123/peripherals/123",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"gateways",
+								"123",
+								"peripherals",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
