@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {store} from './store';
+import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
+import ScrollToTop from './utils/scroll-to-top';
+
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+
+import RouteSwitcher from './RouteSwitcher';
+
+import './styles.sass';
+
+library.add(fas);
+
 ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <RouteSwitcher />
+      </BrowserRouter>
+    </Provider>,
     document.getElementById('root'),
 );
 
