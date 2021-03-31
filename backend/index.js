@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const gatewaysRouter = require('./controllers/gateways/routes');
 const peripheralsRouter = require('./controllers/peripherals/routes');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 mongoose.connect('mongodb://db/gateways-manager', {
   useNewUrlParser: true,
