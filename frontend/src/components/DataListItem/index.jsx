@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import InfoTable from '../InfoTable';
+import Button from '../Button';
 
 import styles from './styles.module.sass';
 
@@ -18,15 +19,15 @@ function DataListItem({item}) {
       <div className={styles.itemHeader}>
         <h3>{item.name}</h3>
         <div className={styles.optionsContainer}>
-          <button onClick={toggleInfo} className={styles.optionButton}>
+          <Button onClick={toggleInfo} className={styles.optionButton}>
             <FontAwesomeIcon icon={['fas', 'eye']} />
-          </button>
-          <button className={styles.optionButton}>
+          </Button>
+          <Button onClick={toggleInfo} className={styles.optionButton}>
             <FontAwesomeIcon icon={['fas', 'edit']} />
-          </button>
-          <button className={styles.optionButton}>
+          </Button>
+          <Button onClick={toggleInfo} className={styles.optionButton}>
             <FontAwesomeIcon icon={['fas', 'trash']} />
-          </button>
+          </Button>
         </div>
       </div>
       <div className={cn(
