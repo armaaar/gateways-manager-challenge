@@ -1,0 +1,40 @@
+.dataListItem
+  background-color: #fff
+  border: 1px solid #dfdfdf
+  border-radius: 5px
+  padding: 10px 20px
+  margin-bottom: 5px
+
+.itemHeader
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+
+
+.optionButton
+  border: 0
+  outline: 0
+  border-radius: 100%
+  padding: 10px
+  display: inline-block
+  cursor: pointer
+  margin-right: 15px
+  &:last-child
+    margin-right: 0
+  background-color: #efefef
+  &:hover, &:focus
+    background-color: #dfdfdf
+
+.itemInfoContainer
+  border-top: 1px solid #fff
+  max-height: 0
+  overflow: hidden
+  transition: all 1s
+  padding: 0 20px
+
+.itemInfoContainer_shown
+  border-top: 1px solid #dfdfdf
+  max-height: 200px
+
+  padding: 20px
