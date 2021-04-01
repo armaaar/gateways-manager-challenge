@@ -1,5 +1,3 @@
-// const {Gateway} = require('../../models/gateway');
-// const {Peripheral} = require('../../models/peripheral');
 const mongoReadableErrors = require('../../utils/readable-mongo-errors');
 
 const getGatewayPeripherals = async (req, res) => {
@@ -33,7 +31,7 @@ const addGatewayPeripheral = async (req, res) => {
   req.gateway.peripherals.push({
     UID: req.body.UID && Number(req.body.UID),
     vendor: req.body.vendor,
-    status: Boolean(req.body.status) && !['0', 'false'].includes(req.body.status),
+    status: !['0', 'false'].includes(req.body.status) && Boolean(req.body.status),
   });
   try {
     await req.gateway.save();
@@ -57,12 +55,12 @@ const updateGatewayPeripheral = async (req, res) => {
     peripheral.UID = Number(req.body.UID);
   }
 
-  if (req.body.vendor) {
+  if (req.body.vendor !== undefined) {
     peripheral.vendor = req.body.vendor;
   }
 
-  if (req.body.status) {
-    peripheral.status = Boolean(req.body.status) && !['0', 'false'].includes(req.body.status);
+  if (req.body.status !== undefined) {
+    peripheral.status = !['0', 'false'].includes(req.body.status) && Boolean(req.body.status);
   }
 
   try {
