@@ -1,55 +1,22 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import Loader from '../../components/Loader';
-import DataList from '../../components/DataList';
-import Modal from '../../components/Modal';
-import FormCreator from '../../components/FormCreator';
-import Button from '../../components/Button';
+import Loader from '../components/Loader';
+import DataList from '../components/DataList';
+import Modal from '../components/Modal';
+import FormCreator from '../components/FormCreator';
+import TitleWithButton from '../components/TitleWithButton';
 
-import useApi from '../../hooks/use-api';
-import connectWithRouter from '../../utils/connect-with-router';
-import createAutoSelector from '../../utils/auto-selector';
+import useApi from '../hooks/use-api';
+import connectWithRouter from '../utils/connect-with-router';
+import createAutoSelector from '../utils/auto-selector';
+import GATEWAY_FORM_FIELDS from '../formFields/gatewayFormFields';
 import {
   fetchGateways,
   createGateway,
   updateGateway,
   deleteGateway,
-} from '../../actions/gateways-actions';
-
-import styles from './styles.module.sass';
-
-const GATEWAY_FORM_FIELDS = [
-  {
-    key: 'serialNumber',
-    label: 'Serial Number',
-    type: 'text',
-    initValue: '',
-    validator: (value) => {
-      if (!value) return 'Serial Number must be provided';
-      return null;
-    },
-  },
-  {
-    key: 'readableName',
-    label: 'Readable Name',
-    type: 'text',
-    initValue: '',
-  },
-  {
-    key: 'ipv4',
-    label: 'IPv4',
-    type: 'text',
-    initValue: '',
-    validator: (value) => {
-      if (!value) return 'IPv4 must be provided';
-      if (!(/^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$/.test(value))) {
-        return 'IPv4 is invalid';
-      }
-      return null;
-    },
-  },
-];
+} from '../actions/gateways-actions';
 
 function GatewaysPage({
   gateways,
@@ -84,6 +51,8 @@ function GatewaysPage({
   const gatewaysList = gateways.map((gateway) => ({
     id: gateway.serialNumber,
     name: gateway.readableName || gateway.serialNumber || gateway.ipv4,
+    link: `/${gateway.serialNumber}`,
+    linkText: 'Show gateway peripherals',
     info: [
       {
         key: 'serialNumber',
@@ -109,12 +78,9 @@ function GatewaysPage({
   }));
   return (
     <section>
-      <div className={styles.header}>
-        <h2>Gateways</h2>
-        <Button onClick={showModal}>
-          <FontAwesomeIcon icon={['fas', 'plus']} /> New Gateway
-        </Button>
-      </div>
+      <TitleWithButton title="Gateways" onButtonClick={showModal}>
+        <FontAwesomeIcon icon={['fas', 'plus']} /> New Gateway
+      </TitleWithButton>
       {!isReady ? (
         <Loader />
       ) : (

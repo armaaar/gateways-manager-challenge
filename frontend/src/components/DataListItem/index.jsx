@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -65,7 +66,10 @@ function DataListItem({
           {[styles.itemInfoContainer_shown]: isInfoShown},
       )}>
         {item.info && (
-          <InfoTable infos={item.info} />
+          <>
+            <InfoTable infos={item.info} />
+            {item.link && (<Link className={styles.link} to={item.link}>{item.linkText}</Link>)}
+          </>
         )}
       </div>
       <Modal isShown={isEditFormShown} onClose={closeEditModal}>
@@ -95,6 +99,8 @@ function DataListItem({
 export const itemPropTypes = PropTypes.shape({
   id: PropTypes.any.isRequired,
   name: PropTypes.string.isRequired,
+  link: PropTypes.string,
+  linkText: PropTypes.string,
   info: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string.isRequired,

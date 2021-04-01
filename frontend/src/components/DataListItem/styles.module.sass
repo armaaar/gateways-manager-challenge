@@ -26,6 +26,23 @@
 
 .itemInfoContainer_shown
   border-top: 1px solid #dfdfdf
-  max-height: 200px
+  max-height: 300px
 
   padding: 20px
+
+.link
+  display: block
+  margin-top: 20px
+  text-decoration: none
+  color: blue
+  &::before
+    content: '\2192'
+    display: inline-block
+    margin-right: 10px
+    transform: translateX(0)
+    transition: transform 300ms
+  &:hover
+    text-decoration: underline
+    &::before
+      transform: translateX(5px)
+

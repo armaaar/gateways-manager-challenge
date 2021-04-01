@@ -6,6 +6,7 @@ import PageLoading from './components/PageLoading';
 
 const loadbleOptions = {fallback: <PageLoading />};
 const GatewaysPage = loadable(() => import('./pages/Gateways'), loadbleOptions);
+const GatewayPage = loadable(() => import('./pages/Gateways'), loadbleOptions);
 const NotFoundPage = loadable(() => import('./pages/404'), loadbleOptions);
 
 export default function RouteSwitcher() {
@@ -14,6 +15,9 @@ export default function RouteSwitcher() {
       <Switch>
         <Route exact path="/">
           <GatewaysPage />
+        </Route>
+        <Route path="/:gatewaySerialNumber">
+          <GatewayPage />
         </Route>
         <Route path="*">
           <NotFoundPage />
