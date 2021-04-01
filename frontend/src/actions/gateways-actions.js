@@ -32,7 +32,7 @@ export function removeGateway(serialNumber) {
   return {
     type: REMOVE_GATEWAY,
     payload: {
-      serialNumber: serialNumber,
+      serialNumber,
     },
   };
 }

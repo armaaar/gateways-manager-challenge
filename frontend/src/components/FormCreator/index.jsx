@@ -59,13 +59,28 @@ function FormCreator({
           <label htmlFor={field.key} className={styles.fieldLabel}>
             {field.label}
           </label>
-          <input
-            id={field.key}
-            value={values[field.key]}
-            onChange={(ev) => onValueChange(field.key, ev.target.value)}
-            type={field.type}
-            className={styles.field}
-          />
+          {field.type === 'select' ? (
+            <select
+              id={field.key}
+              className={styles.field}
+              onChange={(ev) => onValueChange(field.key, ev.target.value)}
+              defaultValue={values[field.key]}
+            >
+              {field.options.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              id={field.key}
+              value={values[field.key]}
+              onChange={(ev) => onValueChange(field.key, ev.target.value)}
+              type={field.type}
+              className={styles.field}
+            />
+          )}
           {errors[field.key] && (
             <p className={styles.fieldError}>
               {errors[field.key]}
@@ -87,6 +102,7 @@ export const formFieldsPropTypes = PropTypes.arrayOf(
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
+      options: PropTypes.array,
       initValue: PropTypes.any,
       validator: PropTypes.func,
     }),

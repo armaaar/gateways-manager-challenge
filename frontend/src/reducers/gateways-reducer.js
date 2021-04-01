@@ -3,6 +3,7 @@ import {
   UPSERT_GATEWAY,
   REMOVE_GATEWAY,
 } from '../actions/gateways-actions';
+import peripheralsReducer from './peripherals-reducer';
 
 function addGateways(state, gateways) {
   const newGateways = [...state];
@@ -44,6 +45,19 @@ export default function gatewaysReducer(state = [], {type, payload}) {
       return removeGateway(state, payload.serialNumber);
     }
     default: {
+      if (type.startsWith('peripherals:') && payload.gatewaySerialNumber) {
+        const gateway = state.find(
+            (gateway) => gateway.serialNumber === payload.gatewaySerialNumber,
+        );
+
+        if (!gateway) return state;
+
+        return upsertGateway(state, {
+          ...gateway,
+          peripherals: peripheralsReducer(gateway.peripherals, {type, payload}),
+        });
+      }
+
       return state;
     }
   }

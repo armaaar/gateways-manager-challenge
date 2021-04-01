@@ -14,17 +14,34 @@ import useApi from '../hooks/use-api';
 import connectWithRouter from '../utils/connect-with-router';
 import createAutoSelector from '../utils/auto-selector';
 import GATEWAY_FORM_FIELDS from '../formFields/gatewayFormFields';
+import PERIPHERAL_FORM_FIELDS from '../formFields/peripheralFormFields';
 import {
   fetchGateways,
   updateGateway,
   deleteGateway,
 } from '../actions/gateways-actions';
+import {
+  createPerihperal,
+  updatePerihperal,
+  deletePerihperal,
+} from '../actions/peripherals-actions';
+
+function processFormValues({UID, vendor, status}) {
+  return {
+    UID: Number(UID),
+    vendor,
+    status: status === 'Online',
+  };
+}
 
 function GatewayPage({
   gateways,
   fetchGateways,
   updateGateway,
   deleteGateway,
+  createPerihperal,
+  updatePerihperal,
+  deletePerihperal,
 }) {
   const {gatewaySerialNumber} = useParams();
   const gateway = gateways.find((gw) => gw.serialNumber === gatewaySerialNumber);
@@ -58,12 +75,12 @@ function GatewayPage({
 
   const peripheralsInfo = gateway && gateway.peripherals.map((peripheral) => ({
     id: peripheral.UID,
-    name: peripheral.UID || peripheral.vendor,
+    name: String(peripheral.UID) || peripheral.vendor,
     info: [
       {
         key: 'UID',
         name: 'UID',
-        value: peripheral.UID,
+        value: String(peripheral.UID),
       },
       {
         key: 'vendor',
@@ -113,15 +130,16 @@ function GatewayPage({
   }
 
   function onCreatePeripheral(_, values) {
-    // return createGateway(values);
+    return createPerihperal(gatewaySerialNumber, processFormValues(values));
   }
 
   function onUpdatePeripheral(originalUID, values) {
-    // return updateGateway(originalSerialNumber, values);
+    console.log(values, processFormValues(values));
+    return updatePerihperal(gatewaySerialNumber, originalUID, processFormValues(values));
   }
 
   function onDeletePeripheral(UID) {
-    // return deleteGateway(serialNumber);
+    return deletePerihperal(gatewaySerialNumber, UID);
   }
 
   return (
@@ -144,7 +162,7 @@ function GatewayPage({
           </TitleWithButton>
           <DataList
             items={peripheralsInfo}
-            formFields={GATEWAY_FORM_FIELDS}
+            formFields={PERIPHERAL_FORM_FIELDS}
             onEdit={onUpdatePeripheral}
             onDelete={onDeletePeripheral}
           />
@@ -152,7 +170,7 @@ function GatewayPage({
             <FormCreator
               resetFlag={isAddPeripheralFormShown}
               title="New Peripheral"
-              fields={GATEWAY_FORM_FIELDS}
+              fields={PERIPHERAL_FORM_FIELDS}
               onSubmit={onCreatePeripheral}
               onSuccess={closeModal}
             />
@@ -188,6 +206,9 @@ const mapActionsToProps = {
   fetchGateways,
   updateGateway,
   deleteGateway,
+  createPerihperal,
+  updatePerihperal,
+  deletePerihperal,
 };
 
 export default connectWithRouter(
