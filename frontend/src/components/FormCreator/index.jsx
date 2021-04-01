@@ -6,10 +6,11 @@ import Button from '../Button';
 import styles from './styles.module.sass';
 
 function FormCreator({
+  referenceKey,
   title,
   fields,
-  fieldsErrors,
   onSubmit,
+  onSuccess,
   resetFlag,
 }) {
   const [values, setValues] = useState({});
@@ -22,10 +23,6 @@ function FormCreator({
     });
     setValues(initValues);
   }, [fields, resetFlag]);
-
-  useEffect(() => {
-    setErrors(fieldsErrors);
-  }, [fieldsErrors, resetFlag]);
 
   function onValueChange(key, val) {
     setValues({
@@ -46,7 +43,12 @@ function FormCreator({
     });
 
     setErrors(fieldsErrors);
-    if (!errorsFlag) onSubmit(values);
+    if (!errorsFlag) {
+      onSubmit(referenceKey, values).then((response) => {
+        if (response && response.errors) setErrors(response.errors);
+        else onSuccess(referenceKey);
+      });
+    }
   }
 
   return (
@@ -80,25 +82,29 @@ function FormCreator({
   );
 }
 
+export const formFieldsPropTypes = PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      initValue: PropTypes.any,
+      validator: PropTypes.func,
+    }),
+).isRequired;
+
 FormCreator.propTypes = {
+  referenceKey: PropTypes.any,
   title: PropTypes.string,
-  fields: PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        initValue: PropTypes.any,
-        validator: PropTypes.func,
-      }),
-  ).isRequired,
-  fieldsErrors: PropTypes.object,
+  fields: formFieldsPropTypes,
   onSubmit: PropTypes.func,
+  onSuccess: PropTypes.func,
   resetFlag: PropTypes.bool,
 };
 
 FormCreator.defaultProps = {
   title: '',
   onSubmit: () => {},
+  onSuccess: () => {},
   resetFlag: false,
 };
 

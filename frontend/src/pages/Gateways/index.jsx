@@ -10,7 +10,7 @@ import Button from '../../components/Button';
 import useApi from '../../hooks/use-api';
 import connectWithRouter from '../../utils/connect-with-router';
 import createAutoSelector from '../../utils/auto-selector';
-import {fetchGateways, createGateway} from '../../actions/gateways-actions';
+import {fetchGateways, createGateway, updateGateway} from '../../actions/gateways-actions';
 
 import styles from './styles.module.sass';
 
@@ -46,28 +46,29 @@ const GATEWAY_FORM_FIELDS = [
   },
 ];
 
-function GatewaysPage({gateways, fetchGateways, createGateway}) {
+function GatewaysPage({
+  gateways,
+  fetchGateways,
+  createGateway,
+  updateGateway,
+}) {
   const isReady = useApi(gateways, fetchGateways);
   const [isAddGatewayFormShown, setIsAddGatewayFormShown] = useState(false);
-  const [apiErrors, setApiErrors] = useState({});
 
-  function onAddButtonClick() {
+  function showModal() {
     setIsAddGatewayFormShown(true);
   }
 
-  function onModalClose() {
+  function closeModal() {
     setIsAddGatewayFormShown(false);
-    setApiErrors({});
   }
 
-  function onCreateGateway(values) {
-    createGateway(values).then((response) => {
-      if (response && response.errors) {
-        setApiErrors(response.errors);
-      } else {
-        onModalClose();
-      }
-    });
+  function onCreateGateway(_, values) {
+    return createGateway(values);
+  }
+
+  function onUpdateGateway(originalSerialNumber, values) {
+    return updateGateway(originalSerialNumber, values);
   }
 
   const gatewaysList = gateways.map((gateway) => ({
@@ -85,8 +86,8 @@ function GatewaysPage({gateways, fetchGateways, createGateway}) {
         value: gateway.readableName,
       },
       {
-        key: 'IPv4',
-        name: 'Serial Number',
+        key: 'ipv4',
+        name: 'IPv4',
         value: gateway.ipv4,
       },
       {
@@ -100,24 +101,30 @@ function GatewaysPage({gateways, fetchGateways, createGateway}) {
     <section>
       <div className={styles.header}>
         <h2>Gateways</h2>
-        <Button onClick={onAddButtonClick}>
+        <Button onClick={showModal}>
           <FontAwesomeIcon icon={['fas', 'plus']} /> New Gateway
         </Button>
       </div>
       {!isReady ? (
         <Loader />
       ) : (
-        <DataList items={gatewaysList} />
+        <>
+          <DataList
+            items={gatewaysList}
+            formFields={GATEWAY_FORM_FIELDS}
+            onEdit={onUpdateGateway}
+          />
+          <Modal isShown={isAddGatewayFormShown} onClose={closeModal}>
+            <FormCreator
+              resetFlag={isAddGatewayFormShown}
+              title="New Gateway"
+              fields={GATEWAY_FORM_FIELDS}
+              onSubmit={onCreateGateway}
+              onSuccess={closeModal}
+            />
+          </Modal>
+        </>
       )}
-      <Modal isShown={isAddGatewayFormShown} onClose={onModalClose}>
-        <FormCreator
-          resetFlag={isAddGatewayFormShown}
-          title="New Gateway"
-          fields={GATEWAY_FORM_FIELDS}
-          fieldsErrors={apiErrors}
-          onSubmit={onCreateGateway}
-        />
-      </Modal>
     </section>
   );
 }
@@ -146,6 +153,7 @@ const mapStateToProps = createAutoSelector(
 const mapActionsToProps = {
   fetchGateways,
   createGateway,
+  updateGateway,
 };
 
 export default connectWithRouter(

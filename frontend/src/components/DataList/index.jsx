@@ -1,15 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DataListItem from '../DataListItem';
+import DataListItem, {itemPropTypes} from '../DataListItem';
+import {formFieldsPropTypes} from '../FormCreator';
 
 import styles from './styles.module.sass';
 
-function DataList({items, emptyErrorMessage}) {
+function DataList({
+  items,
+  emptyErrorMessage,
+  formFields,
+  onEdit,
+}) {
   return (
     <div>
       {items.length ?
         items.map((item) => (
-          <DataListItem key={item.id} item={item} />
+          <DataListItem
+            key={item.id}
+            item={item}
+            formFields={formFields}
+            onEdit={onEdit}
+          />
         )) :
         (
         <p className={styles.errorMessage}>
@@ -21,23 +32,15 @@ function DataList({items, emptyErrorMessage}) {
 }
 
 DataList.propTypes = {
-  items: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        info: PropTypes.arrayOf(
-            PropTypes.shape({
-              key: PropTypes.string.isRequired,
-              name: PropTypes.string.isRequired,
-              value: PropTypes.string.isRequired,
-            }),
-        ),
-      }),
-  ),
+  items: PropTypes.arrayOf(itemPropTypes),
+  formFields: formFieldsPropTypes,
+  onEdit: PropTypes.func,
   emptyErrorMessage: PropTypes.string,
 };
 
 DataList.defaultProps = {
   items: [],
+  onEdit: () => {},
   emptyErrorMessage: 'The list is empty',
 };
 

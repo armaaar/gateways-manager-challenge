@@ -42,7 +42,24 @@ export function fetchGateways() {
 export function createGateway({serialNumber, readableName, ipv4}) {
   return (dispatch) => {
     return axios.post(
-        API_SOURCE+'/gateways/',
+        `${API_SOURCE}/gateways/`,
+        {
+          serialNumber,
+          readableName,
+          ipv4,
+        },
+    ).then( (response) => {
+      dispatch(upsertGateway(response.data));
+    }).catch((error) => {
+      return error.response.data;
+    });
+  };
+}
+
+export function updateGateway(originalSerialNumber, {serialNumber, readableName, ipv4}) {
+  return (dispatch) => {
+    return axios.put(
+        `${API_SOURCE}/gateways/${originalSerialNumber}`,
         {
           serialNumber,
           readableName,
