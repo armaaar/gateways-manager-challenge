@@ -6,7 +6,7 @@ import PageLoading from './components/PageLoading';
 
 const loadbleOptions = {fallback: <PageLoading />};
 const GatewaysPage = loadable(() => import('./pages/Gateways'), loadbleOptions);
-const GatewayPage = loadable(() => import('./pages/Gateways'), loadbleOptions);
+const GatewayPage = loadable(() => import('./pages/Gateway'), loadbleOptions);
 const NotFoundPage = loadable(() => import('./pages/404'), loadbleOptions);
 
 export default function RouteSwitcher() {

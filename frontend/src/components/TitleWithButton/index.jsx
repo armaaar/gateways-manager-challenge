@@ -9,9 +9,11 @@ function TitleWithButton({title, onButtonClick, children}) {
   return (
     <div className={styles.header}>
       <h2>{title}</h2>
-      <Button onClick={onButtonClick}>
-        {children}
-      </Button>
+      {children && (
+        <Button onClick={onButtonClick}>
+          {children}
+        </Button>
+      )}
     </div>
   );
 }
@@ -19,7 +21,7 @@ function TitleWithButton({title, onButtonClick, children}) {
 TitleWithButton.propTypes = {
   title: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Header.defaultProps = {

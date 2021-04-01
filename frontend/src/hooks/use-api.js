@@ -4,12 +4,12 @@ export default function useApi(state, fetch) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // fetch once if needed
-    setIsReady(true);
-
-    // fetch if no state exists
-    if ((!state || (Array.isArray(state) && !state.length)) && !isReady) {
-      fetch();
+    if (state && Array.isArray(state) && state.length) {
+      setIsReady(true);
+    } else if (!isReady) {
+      fetch().then(() => {
+        setIsReady(true);
+      });
     }
   }, [fetch, isReady, state]);
 
