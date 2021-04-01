@@ -10,6 +10,7 @@ function DataList({
   emptyErrorMessage,
   formFields,
   onEdit,
+  onDelete,
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ function DataList({
             item={item}
             formFields={formFields}
             onEdit={onEdit}
+            onDelete={onDelete}
           />
         )) :
         (
@@ -35,12 +37,14 @@ DataList.propTypes = {
   items: PropTypes.arrayOf(itemPropTypes),
   formFields: formFieldsPropTypes,
   onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
   emptyErrorMessage: PropTypes.string,
 };
 
 DataList.defaultProps = {
   items: [],
   onEdit: () => {},
+  onDelete: () => {},
   emptyErrorMessage: 'The list is empty',
 };
 

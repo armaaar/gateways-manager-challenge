@@ -10,7 +10,12 @@ import Button from '../../components/Button';
 import useApi from '../../hooks/use-api';
 import connectWithRouter from '../../utils/connect-with-router';
 import createAutoSelector from '../../utils/auto-selector';
-import {fetchGateways, createGateway, updateGateway} from '../../actions/gateways-actions';
+import {
+  fetchGateways,
+  createGateway,
+  updateGateway,
+  deleteGateway,
+} from '../../actions/gateways-actions';
 
 import styles from './styles.module.sass';
 
@@ -51,6 +56,7 @@ function GatewaysPage({
   fetchGateways,
   createGateway,
   updateGateway,
+  deleteGateway,
 }) {
   const isReady = useApi(gateways, fetchGateways);
   const [isAddGatewayFormShown, setIsAddGatewayFormShown] = useState(false);
@@ -69,6 +75,10 @@ function GatewaysPage({
 
   function onUpdateGateway(originalSerialNumber, values) {
     return updateGateway(originalSerialNumber, values);
+  }
+
+  function onDeleteGateway(serialNumber) {
+    return deleteGateway(serialNumber);
   }
 
   const gatewaysList = gateways.map((gateway) => ({
@@ -113,6 +123,7 @@ function GatewaysPage({
             items={gatewaysList}
             formFields={GATEWAY_FORM_FIELDS}
             onEdit={onUpdateGateway}
+            onDelete={onDeleteGateway}
           />
           <Modal isShown={isAddGatewayFormShown} onClose={closeModal}>
             <FormCreator
@@ -154,6 +165,7 @@ const mapActionsToProps = {
   fetchGateways,
   createGateway,
   updateGateway,
+  deleteGateway,
 };
 
 export default connectWithRouter(

@@ -1,6 +1,7 @@
 import {
   ADD_GATEWAYS,
   UPSERT_GATEWAY,
+  REMOVE_GATEWAY,
 } from '../actions/gateways-actions';
 
 function addGateways(state, gateways) {
@@ -27,6 +28,10 @@ function upsertGateway(state, newGateway) {
   return newGateways;
 }
 
+function removeGateway(state, serialNumber) {
+  return [...state.filter((gateway) => gateway.serialNumber !== serialNumber)];
+}
+
 export default function gatewaysReducer(state = [], {type, payload}) {
   switch (type) {
     case ADD_GATEWAYS: {
@@ -34,6 +39,9 @@ export default function gatewaysReducer(state = [], {type, payload}) {
     }
     case UPSERT_GATEWAY: {
       return upsertGateway(state, payload.gateway);
+    }
+    case REMOVE_GATEWAY: {
+      return removeGateway(state, payload.serialNumber);
     }
     default: {
       return state;

@@ -13,9 +13,11 @@ function DataListItem({
   item,
   formFields,
   onEdit,
+  onDelete,
 }) {
   const [isInfoShown, seIsInfoShown] = useState(false);
-  const [isEdityFormShown, setIsEditFormShown] = useState(false);
+  const [isEditFormShown, setIsEditFormShown] = useState(false);
+  const [isRemoveFormShown, setIsRemoveFormShown] = useState(false);
 
   const editFormFields = formFields.map((formField) => ({
     ...formField,
@@ -28,6 +30,14 @@ function DataListItem({
 
   function closeEditModal() {
     setIsEditFormShown(false);
+  }
+
+  function showRemoveModal() {
+    setIsRemoveFormShown(true);
+  }
+
+  function closeRemoveModal() {
+    setIsRemoveFormShown(false);
   }
 
   function toggleInfo() {
@@ -45,7 +55,7 @@ function DataListItem({
           <Button onClick={showEditModal} className={styles.optionButton}>
             <FontAwesomeIcon icon={['fas', 'edit']} />
           </Button>
-          <Button onClick={() => {}} className={styles.optionButton}>
+          <Button onClick={showRemoveModal} className={styles.optionButton}>
             <FontAwesomeIcon icon={['fas', 'trash']} />
           </Button>
         </div>
@@ -58,13 +68,23 @@ function DataListItem({
           <InfoTable infos={item.info} />
         )}
       </div>
-      <Modal isShown={isEdityFormShown} onClose={closeEditModal}>
+      <Modal isShown={isEditFormShown} onClose={closeEditModal}>
         <FormCreator
           referenceKey={item.id}
-          resetFlag={isEdityFormShown}
+          resetFlag={isEditFormShown}
           title="Edit"
           fields={editFormFields}
           onSubmit={onEdit}
+          onSuccess={closeEditModal}
+        />
+      </Modal>
+      <Modal isShown={isRemoveFormShown} onClose={closeRemoveModal}>
+        <FormCreator
+          referenceKey={item.id}
+          resetFlag={isRemoveFormShown}
+          title="Are you sure?"
+          fields={[]}
+          onSubmit={onDelete}
           onSuccess={closeEditModal}
         />
       </Modal>
@@ -88,10 +108,12 @@ DataListItem.propTypes = {
   item: itemPropTypes.isRequired,
   formFields: formFieldsPropTypes,
   onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 DataListItem.defaultProps = {
   onEdit: () => {},
+  onDelete: () => {},
 };
 
 export default DataListItem;

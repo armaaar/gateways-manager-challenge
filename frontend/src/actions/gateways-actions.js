@@ -5,6 +5,7 @@ import {API_SOURCE} from '../utils/constants';
 */
 export const ADD_GATEWAYS = 'gateways:addGateways';
 export const UPSERT_GATEWAY = 'gateways:upsertGateway';
+export const REMOVE_GATEWAY = 'gateways:removeGateway';
 
 /*
 * action creators
@@ -23,6 +24,15 @@ export function upsertGateway(newGateway) {
     type: UPSERT_GATEWAY,
     payload: {
       gateway: newGateway,
+    },
+  };
+}
+
+export function removeGateway(serialNumber) {
+  return {
+    type: REMOVE_GATEWAY,
+    payload: {
+      serialNumber: serialNumber,
     },
   };
 }
@@ -70,5 +80,16 @@ export function updateGateway(originalSerialNumber, {serialNumber, readableName,
     }).catch((error) => {
       return error.response.data;
     });
+  };
+}
+
+export function deleteGateway(serialNumber) {
+  return (dispatch) => {
+    return axios.delete(`${API_SOURCE}/gateways/${serialNumber}`)
+        .then( () => {
+          dispatch(removeGateway(serialNumber));
+        }).catch((error) => {
+          return error.response.data;
+        });
   };
 }
