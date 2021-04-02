@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "description": "Musala practical task",
   "license": "ISC",
+  "author": {
+    "name" : "Ahmed Rafik Ibrahim",
+    "email" : "ahmedrafik_maaar@outlook.com",
+    "url" : "https://github.com/armaaar/"
+  },
   "scripts": {
     "dev": "docker-compose --env-file ./.env.dev up",
     "start": "docker-compose --env-file ./.env.prod up"

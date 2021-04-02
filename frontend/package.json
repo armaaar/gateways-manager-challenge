@@ -1,6 +1,13 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "description": "Musala practical task Backend",
+  "license": "ISC",
+  "author": {
+    "name" : "Ahmed Rafik Ibrahim",
+    "email" : "ahmedrafik_maaar@outlook.com",
+    "url" : "https://github.com/armaaar/"
+  },
   "scripts": {
     "build": "react-scripts build",
     "start:development": "react-scripts start",

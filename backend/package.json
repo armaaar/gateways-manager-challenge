@@ -1,8 +1,13 @@
 {
   "name": "@musala-task/backend",
   "version": "1.0.0",
-  "description": "Musala practical task Backend",
+  "description": "Musala practical task Frontend",
   "license": "ISC",
+  "author": {
+    "name" : "Ahmed Rafik Ibrahim",
+    "email" : "ahmedrafik_maaar@outlook.com",
+    "url" : "https://github.com/armaaar/"
+  },
   "main": "index.js",
   "scripts": {
     "start:development": "nodemon -L index.js",
