@@ -1,5 +1,5 @@
-FROM node
-RUN npm install -g npm@7.8.0
+FROM node:14
+RUN npm install -g npm@6.14.12
 WORKDIR /app
 COPY . /app
 RUN npm install
