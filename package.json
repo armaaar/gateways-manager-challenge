@@ -1,13 +1,13 @@
 {
-  "name": "musala-task",
+  "name": "gateways-manager-challenge",
   "private": true,
   "version": "1.0.0",
-  "description": "Musala practical task",
+  "description": "Gateways Manager Challenge",
   "license": "ISC",
   "author": {
     "name" : "Ahmed Rafik Ibrahim",
-    "email" : "ahmedrafik_maaar@outlook.com",
-    "url" : "https://github.com/armaaar/"
+    "email" : "mail@ahmedrafik.me",
+    "url" : "https://ahmedrafik.me/"
   },
   "scripts": {
     "dev": "docker-compose --env-file ./.env.dev up",

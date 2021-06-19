@@ -1,6 +1,6 @@
-# Musala Practical Task
+# Gateways Manager
 
-This repo is a solution for Musala practical task using Docker, node and react.
+This challenge project created with Docker, express and react.
 
 Link to task: [https://drive.google.com/file/d/1IscwxVzB1aYM-rEjSTr-EdLdPddxG5Nm/view](https://drive.google.com/file/d/1IscwxVzB1aYM-rEjSTr-EdLdPddxG5Nm/view)
 
@@ -26,7 +26,7 @@ You can start the application in one of 2 modes, production or development.
   npm run start
   ```
 
-  If you don't hove nodejs installed, you can run:
+  If you don't have nodejs installed, you can run:
 
   ```sh
   docker-compose --env-file ./.env.prod up

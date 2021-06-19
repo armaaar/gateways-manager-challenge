@@ -1,12 +1,12 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "Musala practical task Backend",
+  "description": "Gateways Manager Challenge Backend",
   "license": "ISC",
   "author": {
-    "name" : "Ahmed Rafik Ibrahim",
-    "email" : "ahmedrafik_maaar@outlook.com",
-    "url" : "https://github.com/armaaar/"
+    "name": "Ahmed Rafik Ibrahim",
+    "email": "mail@ahmedrafik.me",
+    "url": "https://ahmedrafik.me/"
   },
   "scripts": {
     "build": "react-scripts build",

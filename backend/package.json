@@ -1,12 +1,12 @@
 {
   "name": "@musala-task/backend",
   "version": "1.0.0",
-  "description": "Musala practical task Frontend",
+  "description": "Gateways Manager Challenge Frontend",
   "license": "ISC",
   "author": {
     "name" : "Ahmed Rafik Ibrahim",
-    "email" : "ahmedrafik_maaar@outlook.com",
-    "url" : "https://github.com/armaaar/"
+    "email" : "mail@ahmedrafik.me",
+    "url" : "https://ahmedrafik.me/"
   },
   "main": "index.js",
   "scripts": {
